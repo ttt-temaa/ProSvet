@@ -6,14 +6,16 @@ import { ProjectCard } from "@/components/cards/ProjectCard";
 import { Button } from "@/components/ui/Button";
 import { Container, H2, Section } from "@/components/ui/Container";
 
-export function HomeProjects() {
+export function HomeProjects({ dark }: { dark?: boolean }) {
   const [filter, setFilter] = useState("all");
   const list = (filter === "all" ? projects : projects.filter((p) => p.industry === filter)).slice(0, 6);
 
   return (
-    <Section>
+    <Section className={dark ? "bg-ink text-white" : undefined}>
       <Container>
-        <H2>150+ объектов — от школ до производственных предприятий</H2>
+        <H2 className={dark ? "text-white" : undefined}>
+          150+ объектов — от школ до производственных предприятий
+        </H2>
         <div className="mt-6 flex flex-wrap gap-2">
           {projectFilters
             .filter((f) => ["all", "proizvodstvo", "obrazovanie", "meditsina", "commerciya", "ulitsa"].includes(f.slug))
@@ -21,7 +23,15 @@ export function HomeProjects() {
               <button
                 key={f.slug}
                 onClick={() => setFilter(f.slug)}
-                className={`rounded-full px-4 py-2 text-sm ${filter === f.slug ? "bg-ink text-white" : "bg-soft"}`}
+                className={`rounded-full px-4 py-2 text-sm ${
+                  filter === f.slug
+                    ? dark
+                      ? "bg-accent text-ink"
+                      : "bg-ink text-white"
+                    : dark
+                      ? "bg-white/10"
+                      : "bg-soft"
+                }`}
               >
                 {f.label}
               </button>
@@ -33,7 +43,7 @@ export function HomeProjects() {
           ))}
         </div>
         <div className="mt-8">
-          <Button href="/projects" variant="dark">
+          <Button href="/projects" variant={dark ? "primary" : "dark"}>
             Все проекты
           </Button>
         </div>

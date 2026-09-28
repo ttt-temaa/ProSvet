@@ -11,19 +11,20 @@ export function PaybackCalculator({ compact }: { compact?: boolean }) {
   const [oldW, setOldW] = useState(250);
   const [newW, setNewW] = useState(80);
   const [hours, setHours] = useState(12);
+  const [days, setDays] = useState(22);
   const [tariff, setTariff] = useState(8);
   const [equip, setEquip] = useState(0);
   const [mount, setMount] = useState(0);
 
   const result = useMemo(() => {
-    const now = (qty * oldW * hours * 30 * tariff) / 1000;
-    const after = (qty * newW * hours * 30 * tariff) / 1000;
-    const month = Math.max(0, now - after);
-    const year = month * 12;
+    const nowYear = (qty * oldW * hours * days * 12 * tariff) / 1000;
+    const afterYear = (qty * newW * hours * days * 12 * tariff) / 1000;
+    const year = Math.max(0, nowYear - afterYear);
+    const month = year / 12;
     const capex = equip + mount;
     const payback = month > 0 && capex > 0 ? capex / month : 0;
-    return { now, after, month, year, payback };
-  }, [qty, oldW, newW, hours, tariff, equip, mount]);
+    return { nowYear, afterYear, year, payback };
+  }, [qty, oldW, newW, hours, days, tariff, equip, mount]);
 
   return (
     <div className="grid gap-6 lg:grid-cols-2">
@@ -32,6 +33,7 @@ export function PaybackCalculator({ compact }: { compact?: boolean }) {
         <Field label="Мощность старых, Вт" value={oldW} onChange={setOldW} />
         <Field label="Мощность новых, Вт" value={newW} onChange={setNewW} />
         <Field label="Часов работы в сутки" value={hours} onChange={setHours} />
+        <Field label="Рабочих дней в месяце" value={days} onChange={setDays} />
         <Field label="Стоимость кВт·ч, ₽" value={tariff} onChange={setTariff} step={0.1} />
         {!compact && (
           <>
@@ -43,11 +45,12 @@ export function PaybackCalculator({ compact }: { compact?: boolean }) {
       <div className="rounded-3xl bg-ink p-6 text-white">
         <p className="text-xs uppercase tracking-[0.14em] text-white/50">Предварительный расчёт</p>
         <dl className="mt-5 grid gap-4">
-          <Row k="Расходы сейчас" v={rub(result.now) + " / мес"} />
-          <Row k="После модернизации" v={rub(result.after) + " / мес"} />
-          <Row k="Экономия в месяц" v={rub(result.month)} />
+          <Row k="Текущие расходы" v={rub(result.nowYear) + " / год"} />
+          <Row k="После модернизации" v={rub(result.afterYear) + " / год"} />
           <Row k="Экономия в год" v={rub(result.year)} />
-          {!compact && <Row k="Срок окупаемости" v={equip + mount > 0 ? monthsLabel(result.payback) : "укажите стоимость"} />}
+          {!compact && (
+            <Row k="Срок окупаемости" v={equip + mount > 0 ? monthsLabel(result.payback) : "укажите стоимость"} />
+          )}
         </dl>
         <p className="mt-5 text-xs text-white/50">
           Расчёт является предварительным. Точный результат зависит от параметров объекта и выбранного оборудования.

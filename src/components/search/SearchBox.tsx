@@ -14,7 +14,7 @@ export function SearchBox() {
     if (query.length < 2) return [];
     const items: { href: string; title: string; meta: string }[] = [];
     products.forEach((p) => {
-      if ([p.name, p.sku, p.brand].join(" ").toLowerCase().includes(query)) {
+      if ([p.name, p.sku, p.brand, p.brandSlug].join(" ").toLowerCase().includes(query)) {
         items.push({
           href: `/catalog/${p.category}/${p.slug}`,
           title: p.name,

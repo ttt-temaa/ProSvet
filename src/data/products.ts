@@ -13,6 +13,7 @@ export type Product = {
   name: string;
   sku: string;
   brand: string;
+  brandSlug: string;
   category: ProductCategory;
   applications: string[];
   power: number;
@@ -90,7 +91,8 @@ export const products: Product[] = [
     slug: "hb-150-prom",
     name: "Промышленный светильник HB-150",
     sku: "PS-HB-150",
-    brand: "Мультибренд",
+    brand: "Завод-партнёр 01",
+    brandSlug: "zavod-01",
     category: "promyshlennye",
     applications: ["Производство", "Склад"],
     power: 150,
@@ -121,7 +123,8 @@ export const products: Product[] = [
     slug: "ln-80-line",
     name: "Линейный промышленный LN-80",
     sku: "PS-LN-80",
-    brand: "Мультибренд",
+    brand: "Завод-партнёр 02",
+    brandSlug: "zavod-02",
     category: "promyshlennye",
     applications: ["Производство", "Склад"],
     power: 80,
@@ -149,7 +152,8 @@ export const products: Product[] = [
     slug: "op-36-panel",
     name: "Офисная панель OP-36",
     sku: "PS-OP-36",
-    brand: "Мультибренд",
+    brand: "Завод-партнёр 03",
+    brandSlug: "zavod-03",
     category: "ofisnye",
     applications: ["Офис / коммерция"],
     power: 36,
@@ -177,7 +181,8 @@ export const products: Product[] = [
     slug: "sch-40-class",
     name: "Светильник для класса SCH-40",
     sku: "PS-SCH-40",
-    brand: "Мультибренд",
+    brand: "Завод-партнёр 01",
+    brandSlug: "zavod-01",
     category: "obrazovanie",
     applications: ["Образование"],
     power: 40,
@@ -204,7 +209,8 @@ export const products: Product[] = [
     slug: "md-48-clean",
     name: "Медицинский светильник MD-48",
     sku: "PS-MD-48",
-    brand: "Мультибренд",
+    brand: "Завод-партнёр 04",
+    brandSlug: "zavod-04",
     category: "meditsina",
     applications: ["Медицина"],
     power: 48,
@@ -231,7 +237,8 @@ export const products: Product[] = [
     slug: "st-80-road",
     name: "Консольный уличный ST-80",
     sku: "PS-ST-80",
-    brand: "Мультибренд",
+    brand: "Завод-партнёр 02",
+    brandSlug: "zavod-02",
     category: "ulichnye",
     applications: ["Улица / территория"],
     power: 80,
@@ -258,7 +265,8 @@ export const products: Product[] = [
     slug: "pk-40-park",
     name: "Парковый торшер PK-40",
     sku: "PS-PK-40",
-    brand: "Мультибренд",
+    brand: "Завод-партнёр 05",
+    brandSlug: "zavod-05",
     category: "parkovye",
     applications: ["Парк / общественное пространство", "Улица / территория"],
     power: 40,
@@ -285,7 +293,8 @@ export const products: Product[] = [
     slug: "fl-100-flood",
     name: "Прожектор FL-100",
     sku: "PS-FL-100",
-    brand: "Мультибренд",
+    brand: "Завод-партнёр 03",
+    brandSlug: "zavod-03",
     category: "prozhektory",
     applications: ["Производство", "Склад", "Улица / территория"],
     power: 100,
@@ -312,7 +321,8 @@ export const products: Product[] = [
     slug: "tr-30-track",
     name: "Трековый светильник TR-30",
     sku: "PS-TR-30",
-    brand: "Мультибренд",
+    brand: "Завод-партнёр 01",
+    brandSlug: "zavod-01",
     category: "torgovye",
     applications: ["Торговля", "Офис / коммерция"],
     power: 30,
@@ -345,6 +355,10 @@ export function getProductsByCategory(slug: ProductCategory) {
   return products.filter((p) => p.category === slug);
 }
 
+export function getProductsByBrand(slug: string) {
+  return products.filter((p) => p.brandSlug === slug);
+}
+
 export function getProduct(slug: string) {
   return products.find((p) => p.slug === slug);
 }
@@ -353,6 +367,6 @@ export function searchProducts(query: string) {
   const q = query.trim().toLowerCase();
   if (!q) return [];
   return products.filter((p) =>
-    [p.name, p.sku, p.brand, p.category, ...p.applications].join(" ").toLowerCase().includes(q),
+    [p.name, p.sku, p.brand, p.brandSlug, p.category, ...p.applications].join(" ").toLowerCase().includes(q),
   );
 }

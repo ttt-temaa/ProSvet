@@ -2,20 +2,35 @@
 
 import { useState } from "react";
 import { categories } from "@/data/products";
+import { brands } from "@/data/brands";
 
-export function CatalogFilters() {
+export function CatalogFilters({ brand }: { brand?: string }) {
   const [open, setOpen] = useState(false);
   const body = (
     <div className="grid gap-5 text-sm">
       <fieldset>
         <legend className="mb-2 font-semibold">Категория</legend>
         {categories.map((c) => (
-          <label key={c.slug} className="mb-1 flex gap-2">
-            <input type="checkbox" /> {c.short}
-          </label>
+          <a key={c.slug} href={`/catalog/${c.slug}`} className="mb-1 block hover:text-ink">
+            {c.short}
+          </a>
         ))}
       </fieldset>
-      {["Назначение", "Производитель", "Мощность", "Световой поток", "Цветовая температура", "Степень защиты", "Способ монтажа"].map(
+      <fieldset>
+        <legend className="mb-2 font-semibold">Производитель</legend>
+        <div className="grid gap-1">
+          {brands.map((b) => (
+            <a
+              key={b.slug}
+              href={`/catalog?brand=${b.slug}`}
+              className={brand === b.slug ? "font-semibold text-ink" : "text-muted hover:text-ink"}
+            >
+              {b.name}
+            </a>
+          ))}
+        </div>
+      </fieldset>
+      {["Назначение", "Мощность", "Световой поток", "Цветовая температура", "Степень защиты", "Способ монтажа"].map(
         (f) => (
           <fieldset key={f}>
             <legend className="mb-2 font-semibold">{f}</legend>

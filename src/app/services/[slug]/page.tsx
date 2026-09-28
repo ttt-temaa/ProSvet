@@ -25,6 +25,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   if (!s) notFound();
   const isModern = slug === "modernizatsiya";
   const isDesign = slug === "proektirovanie";
+  const isPodbor = slug === "podbor";
+  const hideBottomCta = isDesign || isPodbor;
 
   return (
     <>
@@ -45,9 +47,10 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             </Button>
           </div>
           <div className="mt-12 grid gap-4 md:grid-cols-2">
-            {s.items.map((i) => (
+            {s.items.map((i, idx) => (
               <div key={i.title} className="rounded-3xl bg-soft p-6">
-                <h2 className="text-xl font-semibold">{i.title}</h2>
+                <p className="text-xs text-muted">0{idx + 1}</p>
+                <h2 className="mt-2 text-xl font-semibold">{i.title}</h2>
                 <p className="mt-2 text-sm text-muted">{i.text}</p>
               </div>
             ))}
@@ -55,15 +58,26 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           {isDesign && (
             <div className="mt-12 grid gap-6 lg:grid-cols-2">
               <div className="rounded-3xl border border-line p-6">
-                <h2 className="text-2xl font-semibold">Что нужно от клиента</h2>
+                <h2 className="text-2xl font-semibold tracking-[-0.03em]">
+                  Расскажите о вашем объекте — предложим решение
+                </h2>
+                <p className="mt-3 text-muted">
+                  Инженерный разбор задачи, несколько вариантов оборудования и понятный следующий шаг — без привязки к одному бренду.
+                </p>
+                <h3 className="mt-8 text-xl font-semibold">Что нужно от клиента</h3>
                 <ul className="mt-4 grid gap-2 text-sm">
-                  {["План помещения", "Размеры и высота", "Назначение", "Существующее освещение", "ТЗ, если есть"].map((x) => (
+                  {[
+                    "План помещения / территории",
+                    "Размеры и высота",
+                    "Назначение",
+                    "Существующее освещение",
+                    "ТЗ, если есть",
+                  ].map((x) => (
                     <li key={x}>— {x}</li>
                   ))}
                 </ul>
               </div>
               <div id="form" className="rounded-3xl bg-soft p-6">
-                <h2 className="text-2xl font-semibold">Отправить план объекта</h2>
                 <LeadForm intent="calc" extra={{ service: s.slug }} />
               </div>
             </div>
@@ -84,7 +98,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           )}
         </Container>
       </Section>
-      <CtaBand />
+      {!hideBottomCta && <CtaBand />}
     </>
   );
 }

@@ -27,8 +27,8 @@ export default function AboutPage() {
             {[
               [site.stats.years, "лет на рынке"],
               [site.stats.objects, "объектов"],
-              ["РФ", "география поставок"],
-              ["~10", "каталогов производителей"],
+              [site.stats.directions, site.stats.directionsLabel],
+              [site.stats.geo, site.stats.geoLabel],
             ].map(([n, l]) => (
               <div key={l} className="rounded-3xl bg-soft p-6">
                 <p className="text-3xl font-semibold">{n}</p>
