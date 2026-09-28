@@ -17,6 +17,7 @@
   --color-line: var(--line);
   --color-soft: var(--soft);
   --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
   --font-sans: var(--font-montserrat);
 }
 
@@ -29,6 +30,10 @@ body {
   color: var(--ink);
   font-family: var(--font-sans), system-ui, sans-serif;
   text-rendering: optimizeLegibility;
+}
+
+.bg-accent {
+  color: var(--ink);
 }
 
 ::selection {

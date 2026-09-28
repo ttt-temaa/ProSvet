@@ -28,7 +28,7 @@ export function ProductCard({ product }: { product: Product }) {
           </Link>
           <Link
             href={`/catalog/${product.category}/${product.slug}#kp`}
-            className="rounded-full bg-accent px-4 py-2 text-sm font-semibold"
+            className="rounded-full bg-accent px-4 py-2 text-sm font-semibold text-ink"
           >
             Получить КП
           </Link>

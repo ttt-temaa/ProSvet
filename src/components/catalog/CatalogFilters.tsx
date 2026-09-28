@@ -56,7 +56,7 @@ export function CatalogFilters({ brand }: { brand?: string }) {
             </button>
           </div>
           {body}
-          <button className="mt-6 w-full rounded-full bg-accent py-3 font-semibold" onClick={() => setOpen(false)}>
+          <button className="mt-6 w-full rounded-full bg-accent py-3 font-semibold text-ink" onClick={() => setOpen(false)}>
             Показать
           </button>
         </div>

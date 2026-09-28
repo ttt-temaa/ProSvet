@@ -3,17 +3,15 @@ import { cn } from "@/lib/utils";
 
 export function Logo({ compact, className }: { compact?: boolean; className?: string }) {
   return (
-    <Link href="/" className={cn("flex items-center gap-2.5", className)} aria-label="Про Свет — на главную">
-      <span className="relative grid h-9 w-9 place-items-center rounded-full bg-ink">
-        <span className="absolute inset-1 rounded-full bg-accent/90" />
-        <span className="relative h-2 w-2 rounded-full bg-ink" />
-      </span>
-      <span className={cn("leading-none", compact && "hidden sm:block")}>
-        <span className="block text-[15px] font-semibold tracking-[-0.04em]">Про Свет</span>
-        <span className="mt-0.5 block text-[10px] uppercase tracking-[0.14em] text-muted">
-          светотехника
-        </span>
-      </span>
+    <Link href="/" className={cn("inline-flex shrink-0 items-center", className)} aria-label="Про Свет — на главную">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/brand/logo.png"
+        alt="Про Свет"
+        width={1048}
+        height={793}
+        className={cn("h-12 w-auto object-contain md:h-14", compact && "h-10 md:h-12")}
+      />
     </Link>
   );
 }

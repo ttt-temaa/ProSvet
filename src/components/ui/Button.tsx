@@ -5,7 +5,7 @@ type Variant = "primary" | "dark" | "ghost" | "line";
 
 const styles: Record<Variant, string> = {
   primary:
-    "bg-accent text-accent-ink hover:brightness-95 border border-accent",
+    "bg-accent text-ink hover:brightness-95 border border-accent",
   dark: "bg-ink text-white hover:bg-black border border-ink",
   ghost: "bg-transparent text-ink hover:bg-soft border border-transparent",
   line: "bg-white text-ink border border-ink/15 hover:border-ink",

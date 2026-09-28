@@ -11,7 +11,7 @@ export function MobileBar() {
         <a href={site.phoneHref} className="rounded-2xl bg-soft py-3 text-center text-xs font-semibold">
           Позвонить
         </a>
-        <button onClick={() => open("kp")} className="rounded-2xl bg-accent py-3 text-center text-xs font-semibold">
+        <button onClick={() => open("kp")} className="rounded-2xl bg-accent py-3 text-center text-xs font-semibold text-ink">
           Получить КП
         </button>
         <a href={site.maxHref} className="rounded-2xl bg-ink py-3 text-center text-xs font-semibold text-white">

@@ -16,7 +16,7 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://prosvet.example"),
-  icons: { icon: "/favicon.svg" },
+  icons: { icon: [{ url: "/favicon.png", type: "image/png" }, { url: "/favicon.svg" }] },
   title: {
     default: `${site.name} — светотехнические решения для объектов`,
     template: `%s — ${site.name}`,
