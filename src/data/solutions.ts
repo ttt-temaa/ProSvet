@@ -29,7 +29,7 @@ export const solutions: Solution[] = [
     how: ["Анализ режимов работы и высот", "Проектирование и расчёт", "Поставка", "Монтаж в технологические окна"],
     productCategories: ["promyshlennye", "prozhektory"],
     industry: "proizvodstvo",
-    image: "/images/hero/factory.jpg",
+    image: "/images/projects/trubnyy/01.jpg",
   },
   {
     slug: "sklady",
@@ -48,7 +48,7 @@ export const solutions: Solution[] = [
     how: ["Съём высот и рядов", "Расчёт оптики", "Комплектация", "Монтаж без остановки отгрузки"],
     productCategories: ["promyshlennye", "prozhektory"],
     industry: "sklady",
-    image: "/images/hero/warehouse.jpg",
+    image: "/images/projects/berserker/05.jpg",
   },
   {
     slug: "obrazovanie",
@@ -124,7 +124,7 @@ export const solutions: Solution[] = [
     how: ["Разбор зон зала", "Схема общего и акцентного света", "Комплектация", "Монтаж"],
     productCategories: ["torgovye", "ofisnye"],
     industry: "commerciya",
-    image: "/images/hero/commerce.jpg",
+    image: "/images/projects/cheboksarskiy-trikotazh/01.jpg",
   },
   {
     slug: "ulichnoe-osveshchenie",
@@ -143,7 +143,7 @@ export const solutions: Solution[] = [
     how: ["Схема территории", "Расчёт точек", "Поставка", "Монтаж"],
     productCategories: ["ulichnye", "prozhektory"],
     industry: "ulitsa",
-    image: "/images/hero/street.jpg",
+    image: "/images/projects/lada/01.jpg",
   },
   {
     slug: "parkovoe",

@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const p = getProject(slug);
   if (!p) return {};
   return pageMeta({
-    title: `${p.title} — ${p.city}`,
+    title: p.title.includes(p.city) ? p.title : `${p.title} — ${p.city}`,
     description: p.task,
     path: `/projects/${p.slug}`,
   });
@@ -29,14 +29,16 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   const similar = projects.filter((x) => x.slug !== p.slug && x.industry === p.industry).slice(0, 3);
   const fallback = similar.length ? similar : projects.filter((x) => x.slug !== p.slug).slice(0, 3);
 
-  const facts = [
-    ["Объект", p.object],
-    ["Город", p.city],
-    ["Площадь", p.area ?? "[ОЖИДАЕМ ПОДТВЕРЖДЁННЫЙ ПОКАЗАТЕЛЬ]"],
-    ["Тип помещения", p.roomType ?? "—"],
-    ["Срок", p.term ?? "20–40 рабочих дней"],
-    ["Количество светильников", p.fixtures ?? "[ОЖИДАЕМ ПОДТВЕРЖДЁННЫЙ ПОКАЗАТЕЛЬ]"],
-  ];
+  const facts = (
+    [
+      ["Объект", p.object],
+      ["Город", p.city],
+      p.area ? ["Площадь", p.area] : null,
+      p.roomType ? ["Тип помещения", p.roomType] : null,
+      p.term ? ["Срок", p.term] : null,
+      p.fixtures ? ["Количество светильников", p.fixtures] : null,
+    ] as Array<[string, string] | null>
+  ).filter((x): x is [string, string] => Boolean(x));
 
   return (
     <Section className="pt-10">
@@ -55,8 +57,10 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             </p>
             <h1 className="mt-2 text-4xl font-semibold tracking-[-0.04em] md:text-5xl">{p.title}</h1>
           </div>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={p.image} alt={p.title} className="rounded-3xl object-cover" />
+          <div className="overflow-hidden rounded-3xl bg-soft">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={p.image} alt={p.title} className="aspect-[16/10] w-full object-cover" />
+          </div>
         </div>
 
         <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -84,9 +88,14 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
         <H2 className="mt-12">Реализация</H2>
         <div className="mt-4 grid gap-4 md:grid-cols-2">
-          {p.gallery.map((src) => (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img key={src} src={src} alt={`Реализация: ${p.title}`} className="rounded-3xl object-cover" />
+          {p.gallery.map((src, i) => (
+            <figure key={src} className="overflow-hidden rounded-3xl bg-soft">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={src} alt={p.galleryLabels?.[i] ? `${p.title}: ${p.galleryLabels[i]}` : `Реализация: ${p.title}`} className="w-full object-cover" />
+              {p.galleryLabels?.[i] ? (
+                <figcaption className="px-4 py-3 text-sm font-semibold">{p.galleryLabels[i]}</figcaption>
+              ) : null}
+            </figure>
           ))}
         </div>
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { projectFilters, projects } from "@/data/projects";
+import { projectFilterOptions, projects } from "@/data/projects";
 import { ProjectCard } from "@/components/cards/ProjectCard";
 import { Button } from "@/components/ui/Button";
 import { Container, H2, Section } from "@/components/ui/Container";
@@ -17,9 +17,7 @@ export function HomeProjects({ dark }: { dark?: boolean }) {
           150+ объектов — от школ до производственных предприятий
         </H2>
         <div className="mt-6 flex flex-wrap gap-2">
-          {projectFilters
-            .filter((f) => ["all", "proizvodstvo", "obrazovanie", "meditsina", "commerciya", "ulitsa"].includes(f.slug))
-            .map((f) => (
+          {projectFilterOptions().map((f) => (
               <button
                 key={f.slug}
                 onClick={() => setFilter(f.slug)}

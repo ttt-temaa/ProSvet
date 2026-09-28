@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { projectFilters, projects } from "@/data/projects";
+import { projectFilterOptions, projects } from "@/data/projects";
 import { ProjectCard } from "@/components/cards/ProjectCard";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { Container, Section } from "@/components/ui/Container";
@@ -22,7 +22,7 @@ export default function ProjectsPage() {
           Более 150 объектов в сфере образования, медицины, промышленности, коммерческой недвижимости и уличного освещения.
         </p>
         <div className="mt-6 flex flex-wrap gap-2">
-          {projectFilters.map((f) => (
+          {projectFilterOptions().map((f) => (
             <button
               key={f.slug}
               onClick={() => setFilter(f.slug)}

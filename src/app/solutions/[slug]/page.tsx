@@ -53,12 +53,16 @@ export default async function SolutionPage({ params }: { params: Promise<{ slug:
           ))}
         </ul>
 
-        <H2 className="mt-16">Реализованные проекты</H2>
-        <div className="mt-6 grid gap-5 md:grid-cols-2">
-          {relatedProjects.map((p) => (
-            <ProjectCard key={p.slug} project={p} />
-          ))}
-        </div>
+        {relatedProjects.length > 0 && (
+          <>
+            <H2 className="mt-16">Реализованные проекты</H2>
+            <div className="mt-6 grid gap-5 md:grid-cols-2">
+              {relatedProjects.slice(0, 4).map((p) => (
+                <ProjectCard key={p.slug} project={p} />
+              ))}
+            </div>
+          </>
+        )}
 
         <H2 className="mt-16">Подходящее оборудование</H2>
         <div className="mt-6 grid gap-5 md:grid-cols-2">
