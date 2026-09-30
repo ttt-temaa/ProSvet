@@ -8,9 +8,9 @@ export function Logo({ compact, className }: { compact?: boolean; className?: st
       <img
         src="/brand/logo.png"
         alt="Про Свет"
-        width={1048}
-        height={793}
-        className={cn("h-12 w-auto object-contain md:h-14", compact && "h-10 md:h-12")}
+        width={210}
+        height={159}
+        className={cn("logo-mark", compact && "is-compact")}
       />
     </Link>
   );

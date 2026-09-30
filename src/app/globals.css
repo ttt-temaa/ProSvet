@@ -39,10 +39,28 @@ body {
   padding-bottom: env(safe-area-inset-bottom);
 }
 
-img,
-video {
-  max-width: 100%;
-  height: auto;
+.logo-mark {
+  display: block;
+  width: auto;
+  height: 3rem;
+  max-width: none;
+  object-fit: contain;
+}
+
+@media (min-width: 768px) {
+  .logo-mark {
+    height: 3.5rem;
+  }
+}
+
+.logo-mark.is-compact {
+  height: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .logo-mark.is-compact {
+    height: 3rem;
+  }
 }
 
 .bg-accent {
