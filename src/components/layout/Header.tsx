@@ -45,7 +45,7 @@ export function Header() {
         )}
       >
         <div className="mx-auto flex max-w-[1440px] items-center gap-4 px-4 md:px-8">
-          <Logo compact={compact} priority />
+          <Logo compact={compact} />
           <nav className="hidden items-center gap-5 lg:flex xl:gap-6">
             {nav.map((item) => (
               <Link
