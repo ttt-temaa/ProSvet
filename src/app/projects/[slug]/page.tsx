@@ -97,6 +97,9 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
               ) : null}
             </figure>
           ))}
+          {p.videos?.map((src) => (
+            <video key={src} src={src} controls playsInline preload="metadata" className="w-full rounded-3xl bg-ink" />
+          ))}
         </div>
 
         <div className="mt-12 rounded-3xl bg-accent p-6 md:p-8">

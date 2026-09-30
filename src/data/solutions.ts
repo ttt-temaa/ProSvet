@@ -48,7 +48,7 @@ export const solutions: Solution[] = [
     how: ["Съём высот и рядов", "Расчёт оптики", "Комплектация", "Монтаж без остановки отгрузки"],
     productCategories: ["promyshlennye", "prozhektory"],
     industry: "sklady",
-    image: "/images/projects/berserker/05.jpg",
+    image: "/images/projects/sklad-abk-novocheboksarsk/01.jpg",
   },
   {
     slug: "obrazovanie",
@@ -162,7 +162,7 @@ export const solutions: Solution[] = [
     how: ["Прогулка по сценариям движения", "Подбор торшеров и акцентов", "Поставка", "Монтаж"],
     productCategories: ["parkovye", "ulichnye"],
     industry: "parkovoe",
-    image: "/images/hero/park.jpg",
+    image: "/images/projects/skver-zashchitnikov-kugesi/01.jpg",
   },
 ];
 
