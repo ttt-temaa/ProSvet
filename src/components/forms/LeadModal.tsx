@@ -36,7 +36,7 @@ export function LeadProvider({ children }: { children: React.ReactNode }) {
             aria-label="Закрыть"
             onClick={() => setState((s) => ({ ...s, open: false }))}
           />
-          <div className="relative z-10 max-h-[92vh] w-full overflow-auto rounded-t-3xl bg-white p-6 sm:max-w-md sm:rounded-3xl">
+          <div className="relative z-10 max-h-[92dvh] w-full overflow-auto rounded-t-3xl bg-white p-6 sm:max-w-md sm:rounded-3xl">
             <div className="mb-4 flex items-start justify-between gap-4">
               <h2 className="text-xl font-semibold tracking-[-0.03em]">
                 {state.intent === "callback" ? "Заказать звонок" : "Расскажите о задаче"}

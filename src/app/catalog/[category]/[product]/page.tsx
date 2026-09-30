@@ -6,7 +6,9 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { Button } from "@/components/ui/Button";
 import { Container, H2, Section } from "@/components/ui/Container";
 import { LeadForm } from "@/components/forms/LeadForm";
-import { pageMeta } from "@/lib/seo";
+import { pageMeta, jsonLdProduct } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
+import Image from "next/image";
 
 export function generateStaticParams() {
   return products.map((p) => ({ category: p.category, product: p.slug }));
@@ -17,9 +19,11 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
   const item = getProduct(product);
   if (!item) return {};
   return pageMeta({
-    title: `${item.name} — ${item.sku}`,
+    title: `${item.name} ${item.sku} — характеристики и запрос КП`,
     description: item.description,
     path: `/catalog/${item.category}/${item.slug}`,
+    image: item.image,
+    keywords: [item.name, item.sku, item.brand, "светильник", "КП"],
   });
 }
 
@@ -31,6 +35,16 @@ export default async function ProductPage({ params }: { params: Promise<{ catego
 
   return (
     <Section className="pt-10">
+      <JsonLd
+        data={jsonLdProduct({
+          name: item.name,
+          sku: item.sku,
+          description: item.description,
+          brand: item.brand,
+          image: item.image,
+          path: `/catalog/${item.category}/${item.slug}`,
+        })}
+      />
       <Container>
         <Breadcrumbs
           items={[
@@ -40,9 +54,15 @@ export default async function ProductPage({ params }: { params: Promise<{ catego
           ]}
         />
         <div className="grid gap-8 lg:grid-cols-2">
-          <div className="overflow-hidden rounded-3xl bg-soft">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={item.image} alt={`${item.name}, артикул ${item.sku}`} className="h-full w-full object-cover" />
+          <div className="relative overflow-hidden rounded-3xl bg-soft">
+            <Image
+              src={item.image}
+              alt={`${item.name}, артикул ${item.sku}`}
+              width={1200}
+              height={900}
+              className="h-full w-full object-cover"
+              priority
+            />
           </div>
           <div>
             <p className="text-sm text-muted">

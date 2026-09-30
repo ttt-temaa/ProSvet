@@ -1,7 +1,7 @@
 import { pageMeta } from "@/lib/seo";
 
 export const metadata = pageMeta({
-  title: "Калькулятор освещённости",
+  title: "Калькулятор освещённости — предварительный подбор светильников",
   description: "Предварительный расчёт количества светильников. Не заменяет светотехнический проект.",
   path: "/calculator/lighting",
 });

@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
   const cat = getCategory(category);
   if (!cat) return {};
   return pageMeta({
-    title: cat.name,
+    title: `${cat.name} — подбор и поставка под объект`,
     description: cat.description,
     path: `/catalog/${cat.slug}`,
   });

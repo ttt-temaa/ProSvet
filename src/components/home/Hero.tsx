@@ -23,19 +23,30 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-[86vh] overflow-hidden bg-ink text-white">
-      {slides.map((s, idx) => (
-        <div
-          key={s.src}
-          className="absolute inset-0 transition-opacity duration-1000"
-          style={{ opacity: idx === i ? 1 : 0 }}
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={s.src} alt={s.label} className="h-full w-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/45 to-black/20" />
-        </div>
-      ))}
-      <div className="relative mx-auto flex min-h-[86vh] max-w-[1440px] flex-col justify-end px-4 pb-16 pt-28 md:px-8 md:pb-20">
+    <section className="relative min-h-[86dvh] overflow-hidden bg-ink text-white">
+      {slides.map((s, idx) => {
+        const nearby = Math.abs(idx - i) <= 1 || (i === 0 && idx === slides.length - 1) || (i === slides.length - 1 && idx === 0);
+        if (!nearby) return null;
+        return (
+          <div
+            key={s.src}
+            className="absolute inset-0 transition-opacity duration-700"
+            style={{ opacity: idx === i ? 1 : 0 }}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={s.src}
+              alt=""
+              className="h-full w-full object-cover"
+              fetchPriority={idx === 0 ? "high" : "low"}
+              loading={idx === 0 ? "eager" : "lazy"}
+              decoding={idx === 0 ? "sync" : "async"}
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/45 to-black/20" />
+          </div>
+        );
+      })}
+      <div className="relative mx-auto flex min-h-[86dvh] max-w-[1440px] flex-col justify-end px-4 pb-16 pt-28 md:px-8 md:pb-20">
         <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-accent">
           Чебоксары · поставки по России
         </p>

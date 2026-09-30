@@ -5,8 +5,8 @@ import { LeadForm } from "@/components/forms/LeadForm";
 import { pageMeta } from "@/lib/seo";
 
 export const metadata = pageMeta({
-  title: "Контакты Про Свет",
-  description: `${site.address}. ${site.phone}, ${site.phoneAlt}, ${site.email}`,
+  title: "Контакты — офис в Чебоксарах, поставки по РФ",
+  description: `Офис ООО «Про Свет»: ${site.address}. Телефоны ${site.phone}, ${site.phoneAlt}. Заявка на КП и расчёт освещения.`,
   path: "/contacts",
 });
 

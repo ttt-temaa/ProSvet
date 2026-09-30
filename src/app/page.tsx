@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Hero } from "@/components/home/Hero";
 import { HomeProjects } from "@/components/home/HomeProjects";
 import { PaybackCalculator } from "@/components/calc/PaybackCalculator";
+import { HomeFaq } from "@/components/seo/HomeFaq";
 import { CtaBand } from "@/components/ui/CtaBand";
 import { Button } from "@/components/ui/Button";
 import { Container, H2, Section } from "@/components/ui/Container";
@@ -10,10 +11,18 @@ import { brands } from "@/data/brands";
 import { pageMeta } from "@/lib/seo";
 
 export const metadata = pageMeta({
-  title: "Светотехнические решения для бизнеса и гособъектов",
+  title: "Проектирование и поставка LED-освещения для бизнеса и гособъектов",
   description:
-    "Про Свет — проектирование, подбор, поставка и монтаж LED-освещения для производств, школ, больниц и коммерции. Чебоксары, поставки по России.",
+    "Про Свет — проектирование, светотехнический расчёт, подбор, поставка и монтаж LED-освещения для производств, школ, больниц, складов и улиц. Чебоксары, поставки по России и СНГ.",
   path: "/",
+  keywords: [
+    "проектирование освещения",
+    "светотехнический расчёт",
+    "поставка светильников",
+    "монтаж освещения Чебоксары",
+    "LED освещение производства",
+    "освещение школ и больниц",
+  ],
 });
 
 const cycle = [
@@ -179,6 +188,8 @@ export default function HomePage() {
           </div>
         </Container>
       </Section>
+
+      <HomeFaq />
 
       <CtaBand />
     </>

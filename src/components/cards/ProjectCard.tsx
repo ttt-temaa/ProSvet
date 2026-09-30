@@ -1,12 +1,18 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Project } from "@/data/projects";
 
 export function ProjectCard({ project }: { project: Project }) {
   return (
     <article className="overflow-hidden rounded-3xl border border-line bg-white">
-      <Link href={`/projects/${project.slug}`} className="block aspect-[16/10] overflow-hidden bg-soft">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={project.image} alt={project.title} className="h-full w-full object-cover transition duration-500 hover:scale-105" loading="lazy" />
+      <Link href={`/projects/${project.slug}`} className="relative block aspect-[16/10] overflow-hidden bg-soft">
+        <Image
+          src={project.image}
+          alt={project.title}
+          fill
+          sizes="(max-width: 768px) 100vw, 33vw"
+          className="object-cover transition duration-500 hover:scale-105"
+        />
       </Link>
       <div className="p-5">
         <p className="text-xs uppercase tracking-[0.12em] text-muted">

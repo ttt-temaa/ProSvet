@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 
+export const metadata = { robots: { index: false, follow: true } };
+
 export default function NotFound() {
   return (
     <section className="relative overflow-hidden py-24">

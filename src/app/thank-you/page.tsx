@@ -6,6 +6,7 @@ export const metadata = pageMeta({
   title: "Заявка отправлена",
   description: "Мы получили вашу заявку и свяжемся для уточнения деталей.",
   path: "/thank-you",
+  index: false,
 });
 
 export default function ThankYouPage() {

@@ -1,12 +1,18 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Product } from "@/data/products";
 
 export function ProductCard({ product }: { product: Product }) {
   return (
     <article className="flex flex-col overflow-hidden rounded-3xl border border-line bg-white">
-      <Link href={`/catalog/${product.category}/${product.slug}`} className="block aspect-[4/3] bg-soft">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={product.image} alt={product.name} className="h-full w-full object-cover" loading="lazy" />
+      <Link href={`/catalog/${product.category}/${product.slug}`} className="relative block aspect-[4/3] bg-soft">
+        <Image
+          src={product.image}
+          alt={product.name}
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className="object-cover"
+        />
       </Link>
       <div className="flex flex-1 flex-col p-5">
         <p className="text-xs text-muted">{product.sku}</p>

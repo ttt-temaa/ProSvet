@@ -40,12 +40,12 @@ export function Header() {
     <>
       <header
         className={cn(
-          "sticky top-0 z-50 border-b bg-white/92 backdrop-blur-md transition-all",
+          "sticky top-0 z-50 border-b bg-white md:bg-white/92 md:backdrop-blur-md transition-all",
           compact ? "border-line py-2" : "border-transparent py-3.5",
         )}
       >
         <div className="mx-auto flex max-w-[1440px] items-center gap-4 px-4 md:px-8">
-          <Logo compact={compact} />
+          <Logo compact={compact} priority />
           <nav className="hidden items-center gap-5 lg:flex xl:gap-6">
             {nav.map((item) => (
               <Link

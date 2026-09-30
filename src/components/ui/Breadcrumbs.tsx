@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { jsonLdBreadcrumb } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 export function Breadcrumbs({
   items,
@@ -7,6 +9,11 @@ export function Breadcrumbs({
 }) {
   return (
     <nav aria-label="Хлебные крошки" className="mb-6 text-sm text-muted">
+      <JsonLd
+        data={jsonLdBreadcrumb(
+          items.map((item) => ({ name: item.label, path: item.href })),
+        )}
+      />
       <ol className="flex flex-wrap items-center gap-1.5">
         <li className="hidden sm:inline">
           <Link href="/" className="hover:text-ink">

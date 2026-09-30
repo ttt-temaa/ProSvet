@@ -4,8 +4,8 @@ import { Container, Section } from "@/components/ui/Container";
 import { pageMeta } from "@/lib/seo";
 
 export const metadata = pageMeta({
-  title: "Калькулятор окупаемости LED",
-  description: "Предварительный расчёт экономии после перехода на светодиодное освещение.",
+  title: "Калькулятор окупаемости LED-освещения",
+  description: "Предварительный расчёт экономии после перехода на светодиодное освещение. Точную цифру подтверждаем на объекте.",
   path: "/calculator/payback",
 });
 

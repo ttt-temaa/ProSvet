@@ -4,8 +4,8 @@ import { Container, Section } from "@/components/ui/Container";
 import { pageMeta } from "@/lib/seo";
 
 export const metadata = pageMeta({
-  title: "Подбор освещения за 5 вопросов",
-  description: "Ответьте на 5 вопросов — специалист поможет определить решение для вашего объекта.",
+  title: "Подбор освещения за 5 вопросов — получить решение под объект",
+  description: "Ответьте на 5 вопросов — инженер Про Свет подберёт сценарий освещения и подготовит коммерческое предложение.",
   path: "/quiz",
 });
 

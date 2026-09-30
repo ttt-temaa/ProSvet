@@ -6,7 +6,8 @@ import { Container, Section } from "@/components/ui/Container";
 import { CtaBand } from "@/components/ui/CtaBand";
 import { PaybackCalculator } from "@/components/calc/PaybackCalculator";
 import { LeadForm } from "@/components/forms/LeadForm";
-import { pageMeta } from "@/lib/seo";
+import { pageMeta, jsonLdService } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
@@ -16,7 +17,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const s = getService(slug);
   if (!s) return {};
-  return pageMeta({ title: s.title, description: s.hero, path: `/services/${s.slug}` });
+  return pageMeta({
+    title: `${s.short}: расчёт, поставка и работы под объект`,
+    description: s.hero,
+    path: `/services/${s.slug}`,
+    keywords: [s.short, "освещение", "Чебоксары", "Про Свет"],
+  });
 }
 
 export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -30,6 +36,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
   return (
     <>
+      <JsonLd data={jsonLdService({ name: s.title, description: s.hero, path: `/services/${s.slug}` })} />
       <Section className="pt-10">
         <Container>
           <Breadcrumbs items={[{ href: "/services", label: "Услуги" }, { label: s.short }]} />

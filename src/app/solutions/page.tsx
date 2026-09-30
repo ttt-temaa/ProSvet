@@ -5,8 +5,9 @@ import { Container, Section } from "@/components/ui/Container";
 import { pageMeta } from "@/lib/seo";
 
 export const metadata = pageMeta({
-  title: "Решения по типам объектов",
-  description: "Промышленное, складское, школьное, медицинское, офисное, торговое, уличное и парковое освещение.",
+  title: "Освещение производств, складов, школ, больниц и улиц",
+  description:
+    "Готовые сценарии работ: промышленное, складское, школьное, медицинское, офисное, торговое, уличное и парковое освещение под ключ.",
   path: "/solutions",
 });
 

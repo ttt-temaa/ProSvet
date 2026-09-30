@@ -5,7 +5,9 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { Button } from "@/components/ui/Button";
 import { Container, H2, Section } from "@/components/ui/Container";
 import { LeadForm } from "@/components/forms/LeadForm";
-import { pageMeta } from "@/lib/seo";
+import { pageMeta, jsonLdProject } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
+import Image from "next/image";
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -19,6 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: p.title.includes(p.city) ? p.title : `${p.title} — ${p.city}`,
     description: p.task,
     path: `/projects/${p.slug}`,
+    image: p.image,
   });
 }
 
@@ -42,6 +45,15 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
   return (
     <Section className="pt-10">
+      <JsonLd
+        data={jsonLdProject({
+          name: p.title,
+          description: p.task,
+          image: p.image,
+          path: `/projects/${p.slug}`,
+          city: p.city,
+        })}
+      />
       <Container>
         <Breadcrumbs
           items={[
@@ -57,9 +69,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             </p>
             <h1 className="mt-2 text-4xl font-semibold tracking-[-0.04em] md:text-5xl">{p.title}</h1>
           </div>
-          <div className="overflow-hidden rounded-3xl bg-soft">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={p.image} alt={p.title} className="aspect-[16/10] w-full object-cover" />
+          <div className="relative overflow-hidden rounded-3xl bg-soft">
+            <Image src={p.image} alt={p.title} width={1600} height={1000} className="aspect-[16/10] w-full object-cover" priority />
           </div>
         </div>
 
@@ -90,15 +101,21 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         <div className="mt-4 grid gap-4 md:grid-cols-2">
           {p.gallery.map((src, i) => (
             <figure key={src} className="overflow-hidden rounded-3xl bg-soft">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={src} alt={p.galleryLabels?.[i] ? `${p.title}: ${p.galleryLabels[i]}` : `Реализация: ${p.title}`} className="w-full object-cover" />
+              <Image
+                src={src}
+                alt={p.galleryLabels?.[i] ? `${p.title}: ${p.galleryLabels[i]}` : `Реализация: ${p.title}`}
+                width={1200}
+                height={800}
+                className="w-full object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
               {p.galleryLabels?.[i] ? (
                 <figcaption className="px-4 py-3 text-sm font-semibold">{p.galleryLabels[i]}</figcaption>
               ) : null}
             </figure>
           ))}
           {p.videos?.map((src) => (
-            <video key={src} src={src} controls playsInline preload="metadata" className="w-full rounded-3xl bg-ink" />
+            <video key={src} src={src} controls playsInline preload="none" className="w-full rounded-3xl bg-ink" />
           ))}
         </div>
 

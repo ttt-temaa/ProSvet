@@ -25,11 +25,24 @@ html {
   scroll-behavior: smooth;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 body {
   background: var(--bg);
   color: var(--ink);
   font-family: var(--font-sans), system-ui, sans-serif;
   text-rendering: optimizeLegibility;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
 }
 
 .bg-accent {
@@ -73,6 +86,7 @@ select {
   padding: 0.75rem 0.9rem;
   background: #fff;
   outline: none;
+  font-size: 16px;
 }
 
 .field:focus {

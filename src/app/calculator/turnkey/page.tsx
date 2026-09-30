@@ -4,8 +4,8 @@ import { LeadForm } from "@/components/forms/LeadForm";
 import { pageMeta } from "@/lib/seo";
 
 export const metadata = pageMeta({
-  title: "Индивидуальный расчёт стоимости",
-  description: "Получите индивидуальный расчёт стоимости освещения под ваш объект.",
+  title: "Индивидуальный расчёт стоимости освещения под объект",
+  description: "Оставьте заявку — посчитаем проектирование, поставку и монтаж освещения под ваш объект.",
   path: "/calculator/turnkey",
 });
 

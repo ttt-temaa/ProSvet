@@ -8,7 +8,9 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { Button } from "@/components/ui/Button";
 import { Container, H2, Section } from "@/components/ui/Container";
 import { LeadForm } from "@/components/forms/LeadForm";
-import { pageMeta } from "@/lib/seo";
+import { pageMeta, jsonLdService } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
+import Image from "next/image";
 
 export function generateStaticParams() {
   return solutions.map((s) => ({ slug: s.slug }));
@@ -18,7 +20,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const s = getSolution(slug);
   if (!s) return {};
-  return pageMeta({ title: s.title, description: s.hero, path: `/solutions/${s.slug}` });
+  return pageMeta({
+    title: s.title,
+    description: s.hero,
+    path: `/solutions/${s.slug}`,
+    image: s.image,
+  });
 }
 
 export default async function SolutionPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -30,6 +37,7 @@ export default async function SolutionPage({ params }: { params: Promise<{ slug:
 
   return (
     <Section className="pt-10">
+      <JsonLd data={jsonLdService({ name: s.title, description: s.hero, path: `/solutions/${s.slug}` })} />
       <Container>
         <Breadcrumbs items={[{ href: "/solutions", label: "Решения" }, { label: s.cardTitle }]} />
         <div className="grid items-end gap-8 lg:grid-cols-2">
@@ -40,8 +48,9 @@ export default async function SolutionPage({ params }: { params: Promise<{ slug:
               Получить расчёт
             </Button>
           </div>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={s.image} alt={s.title} className="rounded-3xl object-cover" />
+          <div className="relative aspect-[16/10] overflow-hidden rounded-3xl bg-soft">
+            <Image src={s.image} alt={s.title} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" priority />
+          </div>
         </div>
 
         <H2 className="mt-16">Какие задачи решаем</H2>

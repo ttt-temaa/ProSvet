@@ -3,33 +3,36 @@ import { categories, products } from "@/data/products";
 import { projects } from "@/data/projects";
 import { services } from "@/data/services";
 import { solutions } from "@/data/solutions";
-
-const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://prosvet.example";
+import { siteUrl } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticPages = [
-    "",
-    "/catalog",
-    "/services",
-    "/solutions",
-    "/projects",
-    "/about",
-    "/contacts",
-    "/quiz",
-    "/calculator/payback",
-    "/calculator/lighting",
-    "/calculator/turnkey",
-    "/partners",
-    "/privacy",
-    "/consent",
-  ].map((path) => ({ url: `${base}${path}`, lastModified: new Date() }));
+  const now = new Date();
+  const page = (path: string, priority: number, changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"] = "weekly") => ({
+    url: `${siteUrl}${path}`,
+    lastModified: now,
+    changeFrequency,
+    priority,
+  });
 
   return [
-    ...staticPages,
-    ...categories.map((c) => ({ url: `${base}/catalog/${c.slug}` })),
-    ...products.map((p) => ({ url: `${base}/catalog/${p.category}/${p.slug}` })),
-    ...services.map((s) => ({ url: `${base}/services/${s.slug}` })),
-    ...solutions.map((s) => ({ url: `${base}/solutions/${s.slug}` })),
-    ...projects.map((p) => ({ url: `${base}/projects/${p.slug}` })),
+    page("", 1, "daily"),
+    page("/catalog", 0.9),
+    page("/services", 0.9),
+    page("/solutions", 0.9),
+    page("/projects", 0.9),
+    page("/about", 0.6),
+    page("/contacts", 0.8),
+    page("/quiz", 0.7),
+    page("/calculator/payback", 0.6),
+    page("/calculator/lighting", 0.5),
+    page("/calculator/turnkey", 0.7),
+    page("/partners", 0.6),
+    page("/privacy", 0.2, "yearly"),
+    page("/consent", 0.2, "yearly"),
+    ...categories.map((c) => page(`/catalog/${c.slug}`, 0.8)),
+    ...products.map((p) => page(`/catalog/${p.category}/${p.slug}`, 0.7)),
+    ...services.map((s) => page(`/services/${s.slug}`, 0.85)),
+    ...solutions.map((s) => page(`/solutions/${s.slug}`, 0.85)),
+    ...projects.map((p) => page(`/projects/${p.slug}`, 0.8)),
   ];
 }

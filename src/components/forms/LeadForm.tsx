@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { objectTypes, taskTypes } from "@/data/site";
 import { Button } from "@/components/ui/Button";
+import { collectAttribution, getYmClientId, trackGoal } from "@/lib/analytics";
+import { cn } from "@/lib/utils";
 
 export type LeadIntent =
   | "kp"
@@ -53,10 +55,15 @@ export function LeadForm({
     if (extra) {
       Object.entries(extra).forEach(([k, v]) => data.set(k, v));
     }
+    const attr = collectAttribution();
+    Object.entries(attr).forEach(([k, v]) => data.set(k, v));
+    const ymUid = await getYmClientId();
+    if (ymUid) data.set("ym_uid", ymUid);
     setStatus("loading");
     try {
       const res = await fetch("/api/lead", { method: "POST", body: data });
       if (!res.ok) throw new Error("fail");
+      trackGoal("lead_submit", { intent });
       router.push("/thank-you");
     } catch {
       setStatus("error");
@@ -64,8 +71,9 @@ export function LeadForm({
   }
 
   return (
-    <form onSubmit={onSubmit} className={className ?? "grid gap-3"}>
+    <form onSubmit={onSubmit} className={cn("relative", className ?? "grid gap-3")}>
       <input type="hidden" name="source" value={source} />
+      <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden className="absolute -left-[9999px] h-0 w-0 opacity-0" />
       <label className="grid gap-1 text-sm">
         <span>Имя</span>
         <input required name="name" className="field" placeholder="Как к вам обращаться" />
