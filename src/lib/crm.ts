@@ -8,6 +8,7 @@ const intentTitles: Record<string, string> = {
   partner: "Проектировщик",
   docs: "Документация",
   consult: "Консультация",
+  reselect: "Переподбор аналогов",
 };
 
 function leadTitle(data: LeadPayload) {

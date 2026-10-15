@@ -14,16 +14,18 @@ export type LeadIntent =
   | "quiz"
   | "partner"
   | "docs"
-  | "consult";
+  | "consult"
+  | "reselect";
 
 const titles: Record<LeadIntent, string> = {
   kp: "Получить коммерческое предложение",
   callback: "Заказать звонок",
   calc: "Получить точный расчёт",
   quiz: "Подбор освещения",
-  partner: "Сотрудничество с проектировщиками",
+  partner: "Отправить проект на расчёт",
   docs: "Получить документацию",
   consult: "Получить консультацию",
+  reselect: "Получить переподбор",
 };
 
 export function LeadForm({

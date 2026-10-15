@@ -48,13 +48,13 @@ export function Hero() {
       })}
       <div className="relative mx-auto flex min-h-[86dvh] max-w-[1440px] flex-col justify-end px-4 pb-16 pt-28 md:px-8 md:pb-20">
         <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-accent">
-          Чебоксары · поставки по России
+          Поставки по России и СНГ
         </p>
         <h1 className="max-w-4xl text-4xl font-semibold leading-[1.05] tracking-[-0.04em] md:text-6xl">
-          Светотехнические решения для бизнеса, производства и государственных объектов
+          Светотехнические решения любой сложности: от цеха до госучреждения
         </h1>
         <p className="mt-5 max-w-2xl text-base text-white/80 md:text-lg">
-          Проектируем, подбираем, поставляем и монтируем светодиодное освещение под задачи конкретного объекта любой сложности.
+          Свет с гарантией 5 лет, который экономит до 70% бюджета и проходит проверки надзорных органов. Подберём под ваше ТЗ оборудование от 10+ российских заводов-партнеров
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <Button onClick={() => open("kp")}>Получить коммерческое предложение</Button>
